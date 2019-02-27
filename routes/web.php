@@ -12,17 +12,14 @@
 */
 
 Route::resource('room','RoomController');
-Route::get('/', function (){
-    return 'asd';
+Route::resource('person','PersonController');
 
-});
 
-//
 //Route::get('add-room','RoomController@create');
 //Route::post('add-room','RoomController@store');
 //Route::put('/edit-room/{room}', 'RoomController@update');
-Route::delete('room/{room}', 'RoomController@destroy');
-Route::get('add-person','PersonController@create');
-Route::post('add-person','PersonController@store');
-Route::put('/edit-person/{person}', 'PersonController@update');
-Route::delete('person/{person}', 'PersonController@destroy');
+//Route::delete('room/{room}', 'RoomController@destroy');
+//Route::get('add-person','PersonController@create');
+//Route::post('add-person','PersonController@store');
+//Route::put('/edit-person/{person}', 'PersonController@update');
+//Route::delete('person/{person}', 'PersonController@destroy');

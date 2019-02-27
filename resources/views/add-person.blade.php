@@ -16,7 +16,7 @@
                     Add Room
                 </div>
                 <div class="panel-body">
-                    <form role="form" method="post" action="/add-person">
+                    <form role="form" method="post" action="/person">
                         @csrf
                         <div class="form-group">
                             <label>Enter Name</label>
