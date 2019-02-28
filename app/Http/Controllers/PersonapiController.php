@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
+
 use App\Person;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
-class PersonController extends Controller
+class PersonapiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,20 +15,10 @@ class PersonController extends Controller
      */
     public function index()
     {
-        $users = DB::table('people')->get();
-
-        return view('view-person', ['users' => $users]);
+        $persons = Person::all();
+        return response()->json($persons);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('add-person');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -37,59 +28,62 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+           'name'=>'required',
+            'cnic'=>'required',
+            'phone'=>'required',
+            'address'=>'required',
+            'room_id'=>'required'
+        ]);
+        if($validator->fails()){
+            return array(
+              'error' => true,
+                'message'=> $validator->errors()->all()
+            );
+        }
         if(Room::find($request->room_id)->person->count() < Room::find($request->room_id)->capacity ) {
             $person = Person::create($request->all());
-            return redirect('/')->with('success', 'People has been added');
+            return "People has been added";
         }
         else{
-            return redirect('/')->with('success', 'Room Capacity is FUll');
+            return "Room Capacity is Full";
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Person  $person
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(Person $person)
     {
-        //
+        return response()->json($person);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Person  $person
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Person $person)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Person  $person
+     * @param  int  $id;
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Person $person)
     {
         $person->update($request->all());
-        return redirect('/')->with('success', 'People has been Updated');
+        return response()->json($person);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Person  $person
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Person $person)
     {
         $person->delete();
-        return redirect('/')->with('success', 'People has been Deleted');
+        return "Person Deleted Seccussfully";
     }
 }
