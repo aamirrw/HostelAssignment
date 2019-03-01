@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Person;
+use App\Room;
 use Illuminate\Http\Request;
 
 class PersonController extends Controller
@@ -39,10 +40,10 @@ class PersonController extends Controller
     {
         if(Room::find($request->room_id)->person->count() < Room::find($request->room_id)->capacity ) {
             $person = Person::create($request->all());
-            return redirect('/')->with('success', 'People has been added');
+            return redirect('/person')->with('success', 'People has been added');
         }
         else{
-            return redirect('/')->with('success', 'Room Capacity is FUll');
+            return redirect('/person')->with('success', 'Room Capacity is FUll');
         }
     }
 

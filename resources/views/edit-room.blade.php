@@ -13,7 +13,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    Add Room
+                    Edit Room
                 </div>
                 <div class="panel-body">
                     <form role="form" method="post" action="/room/{{$room->id}}">
