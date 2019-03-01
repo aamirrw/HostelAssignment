@@ -25,23 +25,30 @@
                             <th>Cnic #</th>
                             <th>Phone</th>
                             <th> Address</th>
-                            <th>Created at</th>
-                            <th>Updated at</th>
+
+                            <th colspan="2" style="text-align: center;">Button</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($user as $user)
 
 
                         <tr>
-                            <td> <?php echo $user->room_id; ?></td>
-                            <td><?php echo $user->name; ?></td>
-                            <td><?php echo $user->cnic; ?></td>
-                            <td><?php echo $user->phone; ?></td>
-                            <td> <?php echo $user->address; ?></td>
-                            <td><?php echo $user->created_at; ?></td>
-                            <td><?php echo $user->updated_at; ?></td>
+                            <td> {{$user->room_id}} </td>
+                            <td>{{$user->name}} </td>
+                            <td>{{$user->cnic}}</td>
+                            <td>{{$user->phone}} </td>
+                            <td> {{$user->address}}</td>
+
+                            <td><a class="btn btn-small btn-info" href="{{ URL::to('person/'.$user->id.'/edit') }}">Edit</a></td>
+                            <td><a class="btn btn-small btn-info" href="{{ URL::to('/person/' . $user->id ) }}" onclick="event.preventDefault();
+                                                     document.getElementById('delete-room').submit();">Delete</a></td>
+                            <form id="delete-room" action="person/{{$user->id}}" method="post">
+                                @csrf
+                                @method('DELETE')
+
+                            </form>
 
                         </tr>
                         @endforeach

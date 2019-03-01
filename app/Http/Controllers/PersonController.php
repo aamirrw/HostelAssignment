@@ -14,9 +14,9 @@ class PersonController extends Controller
      */
     public function index()
     {
-        $users = DB::table('people')->get();
+        $user = DB::table('people')->get();
 
-        return view('view-person', ['users' => $users]);
+        return view('view-person',  compact('user'));
     }
 
     /**
@@ -65,7 +65,7 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
-        //
+        return view('edit-person', compact('person'));
     }
 
     /**
@@ -78,7 +78,7 @@ class PersonController extends Controller
     public function update(Request $request, Person $person)
     {
         $person->update($request->all());
-        return redirect('/')->with('success', 'People has been Updated');
+        return redirect('/person')->with('success', 'People has been Updated');
     }
 
     /**
@@ -90,6 +90,6 @@ class PersonController extends Controller
     public function destroy(Person $person)
     {
         $person->delete();
-        return redirect('/')->with('success', 'People has been Deleted');
+        return redirect('/person')->with('success', 'People has been Deleted');
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Room;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        return view('view-room');
+        $user = DB::table('rooms')->get();
+        return view('view-room', compact('user'));
     }
 
     /**
@@ -43,7 +44,7 @@ class RoomController extends Controller
             'has_multimedia' => 'required'
         ]);
         $room = Room::create($request->all());
-        return redirect('/')->with('success', 'Room has been added');
+        return redirect('/room')->with('success', 'Room has been added');
     }
 
     /**
@@ -65,7 +66,7 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
-        //
+        return view('edit-room', compact('room'));
     }
 
     /**
@@ -77,15 +78,9 @@ class RoomController extends Controller
      */
     public function update(Request $request, Room $room)
     {
-        $request->validate([
-            'name'=>'required',
-            'capacity'=> 'required|integer',
-            'status' => 'required',
-            'has_ac' => 'required',
-            'has_multimedia' => 'required'
-        ]);
+
         $room->update($request->all());
-        return redirect('/')->with('success', 'Room has been Updated');
+        return redirect('/room')->with('success', 'Room has been Updated');
     }
 
     /**
@@ -97,6 +92,6 @@ class RoomController extends Controller
     public function destroy(Room $room)
     {
         $room->delete();
-        return redirect('/')->with('success', 'Room has been Deleted');
+        return redirect('/room')->with('success', 'Room has been Deleted');
     }
 }

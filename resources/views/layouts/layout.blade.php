@@ -36,21 +36,20 @@
             <ul class="nav" id="main-menu">
                 <li>
                     <div class="user-img-div">
-                        <img src="/assets/img/user.png" class="img-thumbnail" />
+                        <img src="/assets/img/user.jpg" class="img-thumbnail" style="    max-height: 114px;" />
 
-                        <div class="inner-text">
-                            Jhon Deo Alex
-                            <br />
-                            <small>Last Login : 2 Weeks Ago </small>
+                        <div class="inner-text" style="    margin-top: -26px;
+    font-size: 20px;">
+                            Amer Hayat
+
+
                         </div>
                     </div>
 
                 </li>
 
 
-                <li>
-                    <a  href="/"><i class="fa fa-dashboard "></i>Dashboard</a>
-                </li>
+
                 <li>
                     <a  href="/person"><i class="fa fa-user "></i>Persons</a>
                 </li>

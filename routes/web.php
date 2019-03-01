@@ -21,5 +21,5 @@ Route::resource('person','PersonController');
 //Route::delete('room/{room}', 'RoomController@destroy');
 //Route::get('add-person','PersonController@create');
 //Route::post('add-person','PersonController@store');
-//Route::put('/edit-person/{person}', 'PersonController@update');
+//Route::put('/edit-person/{person}/person', 'PersonController@update');
 //Route::delete('person/{person}', 'PersonController@destroy');

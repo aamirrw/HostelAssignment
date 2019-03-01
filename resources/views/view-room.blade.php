@@ -13,42 +13,51 @@
         <!--   Kitchen Sink -->
         <div class="panel panel-default">
             <div class="panel-heading">
-                Kitchen Sink
+
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+
+                            <th> Name</th>
+                            <th>Capacity #</th>
+                            <th>Status</th>
+                            <th> Has acc</th>
+                            <th> Has Multimedia</th>
+
+                            <th colspan="2" style="text-align: center;">Button</th>
                         </tr>
                         </thead>
+
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+                        @foreach ($user as $user)
+
+
+                            <tr>
+
+                                <td>{{$user->name}} </td>
+                                <td>{{$user->capacity}}</td>
+                                <td>{{$user->status}} </td>
+                                <td> {{$user->has_ac}}</td>
+                                <td> {{$user->has_multimedia}} </td>
+
+                                <td><a class="btn btn-small btn-info" href="{{ URL::to('room/'.$user->id.'/edit') }}">Edit</a></td>
+                                <td><a class="btn btn-small btn-info" href="{{ URL::to('/room/' . $user->id ) }}" onclick="event.preventDefault();
+                                                     document.getElementById('delete-room').submit();">Delete</a></td>
+                                <form id="delete-room" action="room/{{$user->id}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+
+                                </form>
+
+                            </tr>
+                        @endforeach
+
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        <!-- End  Kitchen Sink -->
 @endsection
